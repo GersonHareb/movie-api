@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Películas</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <style>
+    body {
+      /*background-image: linear-gradient(rgba(136, 180, 238, 0.6), rgba(0, 0, 0, 0.7));*/
+      background-size: cover;
+      height: 100vh;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    h1 {
+      font-size: 7rem;
+      text-shadow: 1px -1px 10px rgba(0, 0, 0, 0.36);
+    }
+
+    .title-row {
+      height: 70vh;
+      max-height: 70vh;
+      color: aliceblue;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 80px;
+    }
+    .tagline {
+      font-size: 2rem;
+      font-style: italic;
+      text-shadow: 1px -1px 10px rgba(0, 0, 0, 0.36);
+    }
+
+    span.rating {
+      line-height: 1.2;
+      padding: 9px 18px 15px 18px;
+      max-height: fit-content;
+      max-width: fit-content;
+      font-size: 4rem;
+      font-weight: 600;
+      color: black;
+      background-color: rgb(255, 198, 73);
+      text-shadow: 1px -1px 10px rgba(0, 0, 0, 0.36);
+    }
+
+    span.badge {
+      font-size: 2rem !important;
+    }
+
+    .overview {
+      color: aliceblue;
+      font-weight: 300;
+      font-size: 1.5rem;
+    }
+  </style>
+  <body
+    th:style="'background-image: linear-gradient(rgba(136, 180, 238, 0.6), rgba(0, 0, 0, 0.7)), url(https://image.tmdb.org/t/p/original/' + ${movie.backdropPath} + ')'"
+  >
+    <div class="container">
+      <div class="title-row">
+        <h1 class="title" th:text="${movie.title}"></h1>
+        <p class="tagline" th:text="${movie.tagline}"></p>
+        <span class="rating rounded" th:text="${formattedRating}"></span>
+      </div>
+
+      <div class="row pt-5">
+        <img
+          class="card-img-top mb-5"
+          th:src="@{|https://image.tmdb.org/t/p/original/${movie.backdropPath}|}"
+          alt="Card image cap"
+        />
+        <span
+          class="badge badge-warning mr-2 p-2"
+          th:each="genre : ${movie.genres}"
+          th:text="${genre.name}"
+        ></span>
+        <div class="card-body mt-5">
+          <p class="card-text overview" th:text="${movie.overview}"></p>
+          <p class="card-text" th:text="${movie.releaseDate}">
+            Fecha de lanzamiento de la película
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
