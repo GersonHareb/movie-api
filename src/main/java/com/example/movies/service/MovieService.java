@@ -15,11 +15,12 @@ public class MovieService {
 		this.restTemplate = restTemplate;
 	}
 	String urApiKey = "";
+	String urlRoot = "https://api.themoviedb.org/3/movie/";
 
 	
 	public List<Movie> getTopRatedMovies(){
 
-		String url ="https://api.themoviedb.org/3/movie/top_rated?api_key=" + urApiKey;
+		String url =urlRoot + "top_rated?api_key=" + urApiKey;
 		//Se crea una instancia de la clase MovieResponse, la cual con ayuda del restTemplate se deserializa
 		MovieResponse response = restTemplate.getForObject(url, MovieResponse.class);
 		//finalmente se sirve con el metodo que obtiene la lista
@@ -27,7 +28,7 @@ public class MovieService {
 	}
 
 	public Movie getMovieDetails(Long id) {
-	    String url = "https://api.themoviedb.org/3/movie/" + id + "?api_key=" + urApiKey;
+	    String url = urlRoot + id + "?api_key=" + urApiKey;
 	    return restTemplate.getForObject(url, Movie.class);
 	}
 
